@@ -1,0 +1,31 @@
+{
+  "name": "fluxtools",
+  "version": "0.0.1",
+  "description": "Tools to help you create a simple flux pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arwidt/fluxtools.git"
+  },
+  "keywords": [
+    "flux",
+    "tool",
+    "designpattern",
+    "simple",
+    "easy"
+  ],
+  "author": "Arwid Thornstrom (arwidt@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arwidt/fluxtools/issues"
+  },
+  "homepage": "https://github.com/arwidt/fluxtools#readme",
+  "devDependencies": {
+    "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
+    "should": "^13.2.3"
+  }
+}
