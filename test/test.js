@@ -2,16 +2,229 @@
 
 var tr = require('../index.js');
 var should = require('should');
-var _ = require('lodash');
 
 describe('FluxTools.js', function() {
 
     describe('Trivial test', function() {
-
         it('should run a trivial test', function() {
-
             should(true).equal(true);
+        });
+    });
 
+    describe('getAllPathsOfObject', function() {
+
+        const objbase = {
+            a: "a",
+            b: {
+                c: 123,
+                d: "d",
+                e: {
+                    f: "äf"
+                },
+                g: [1, 2, 3, 4]
+            }
+        };
+
+        it('should return keys obj a object', function() {
+            const paths = tr.getAllPathsOfObject(objbase);
+            paths.should.containEql('a');
+            paths.should.containEql('b.c');
+            paths.should.containEql('b.d');
+            paths.should.containEql('b.e.f');
+            paths.should.containEql('b.g');
+            paths.should.containEql('b.g[0]');
+            paths.should.containEql('b.g[1]');
+            paths.should.containEql('b.g[2]');
+            paths.should.containEql('b.g[3]');
+        });
+        
+    });
+
+    describe('defineStore', function() {
+
+        const store = {
+            a: "a",
+            b: {
+                c: "c"
+            }
+        };
+
+        it('should be possible to add to or define store structure', function() {
+            let newstore = tr.defineStore(store, {d: "d"});
+
+            newstore.d.should.equal("d");
+            newstore.a.should.equal("a");
+            newstore.should.equal(store);
+        });
+
+    });
+
+    describe('deepObjectDiff', function() {
+        
+        const objbase = {
+            a: "a",
+            b: {
+                c: 123,
+                d: "d",
+                e: {
+                    f: "äf"
+                },
+                g: [1, 2, 3, 4]
+            }
+        };
+
+        // -------------------------------
+        // Single shallow diff
+        const test1 = {
+            a: "AAAAA"
+        }
+
+        it('should handle a single shallow diff', function() {
+            const diff = tr.deepObjectDiff(objbase, test1);
+            diff.length.should.equal(1);
+            diff[0].should.equal('a');
+        });
+
+        // -------------------------------
+         // Multiple shallow diffs
+         const test2 = {
+            a: "AAAA",
+            g: "GGGG"
+        }
+
+        it('should handle multiple shallow diffs', function() {
+            const diff = tr.deepObjectDiff(objbase, test2);
+            diff.length.should.equal(1);
+            diff[0].should.equal('a');
+        });
+
+        // -------------------------------
+        // Two deep diff
+        const test3 = {
+            b: {
+                d: "DDDD",
+                e: {
+                    f: "FFFF"
+                }
+            }
+        }
+
+        it('should handle a deep diff', function() {
+            const diff = tr.deepObjectDiff(objbase, test3);
+            diff.should.containEql('b.e.f');
+            diff.should.containEql('b.d');
+        });
+
+        // All the diffs
+        const test4 = {
+            a: "AAAAA",
+            b: {
+                d: "DDDDD",
+                e: {
+                    newthing: "NEWTHING",
+                    f: "FFFFF"
+                },
+                g: [1, 5, 3, 4]
+            },
+            
+        };
+
+        it('should handle all sorts of different update diffs', function() {
+            const diff = tr.deepObjectDiff(objbase, test4);
+            diff.should.containEql('a');
+            diff.should.containEql('b');
+            diff.should.containEql('b.d');
+            diff.should.containEql('b.e');
+            diff.should.containEql('b.e.f');
+            diff.should.containEql('b.g');
+        });
+        
+    });
+
+    describe('wantedDiffKeys', function() {
+        
+        it('should guard from unwanted diffs', function() {
+            const diff = ['a', 'b.d.e', 'f.g'];
+
+            tr.wantedDiffKeys(diff, ['a']).should.equal(false);
+            tr.wantedDiffKeys(diff, ['a', 'f.g', 'a.b.c.d']).should.equal(false);
+            tr.wantedDiffKeys(diff, ['b.d']).should.equal(true);
+        });
+
+    });
+
+    describe('cloneObject', function() {
+
+        const test1 = {
+            a: "AAAAA",
+            b: {
+                d: "DDDDD",
+                e: {
+                    newthing: "NEWTHING",
+                    f: "FFFFF"
+                },
+                g: [1, 5, 3, 4]
+            }
+        };
+
+        it('should clone a deep but simple object', function() {
+            const clone = tr.cloneObject(test1);
+
+            clone.should.not.equal(test1);
+            clone.a.should.equal("AAAAA");
+            clone.b.e.newthing.should.equal("NEWTHING");
+            clone.b.g[1].should.equal(5);
+        });
+
+        const test2 = {
+            a: "AAAAA",
+            b: {
+                d: function() {
+                    return this;
+                },
+                e: {
+                    newthing: "NEWTHING",
+                    f: (function() {
+                        return function() {
+                            return "testbanan";
+                        }
+                    })()
+                },
+                g: [1, 5, 3, 4]
+            }
+        }
+
+        it('should clone a deep and complex object without failing', function() {
+            const clone = tr.cloneObject(test2);
+
+            clone.b.d().should.not.equal(test2.b);
+            clone.b.d().should.equal(clone.b);
+            clone.a.should.equal('AAAAA');
+            clone.b.e.f().should.equal('testbanan');
+        });
+
+    });
+
+
+    describe('pubsub', function() {
+
+        it('should have a internal pubsub', function() {
+            tr.should.have.ownProperty('pubsub');
+        });
+
+        before(function() {
+            tr.pubsub.clearAllSubscriptions();
+        });
+
+        it('should have a publish and subscribe functions', function() {
+            tr.pubsub.should.have.ownProperty('subscribe');
+            tr.pubsub.should.have.ownProperty('publish');
+
+            tr.pubsub.subscribe("TEST", function(action, payload) {
+                action.should.equal('TEST');
+                payload.payload.should.equal("this");
+            });
+            tr.pubsub.publish("TEST", {payload: "this"});
         });
 
     });
