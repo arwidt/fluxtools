@@ -1,6 +1,6 @@
 "use strict";
 
-var tr = require('../index.js');
+var tr = require('./index.js');
 var should = require('should');
 
 describe('FluxTools.js', function() {

@@ -1,7 +1,7 @@
 
-const { updatedDiff } = require("deep-object-diff");
-const { isArray, flatMap, isPlainObject, keys, concat, map } = require('lodash');
-const PubSub = require('pubsub-js');
+import { updatedDiff } from "deep-object-diff";
+import { isArray, flatMap, isPlainObject, keys, concat, map } from 'lodash';
+import PubSub from 'pubsub-js';
 
 // Fastest merge function from jsperf
 // https://jsperf.com/deep-merge2/8

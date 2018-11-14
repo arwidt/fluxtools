@@ -1,11 +1,11 @@
 {
-  "name": "fluxtools",
+  "name": "@arwidt/fluxtools",
   "version": "0.0.1",
   "description": "Tools to help you create a simple flux pattern",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w test/test.js",
-    "example": "cpx \"index.js\" example; static example/"
+    "test": "mocha -w ./index.spec.js",
+    "example": "static ."
   },
   "repository": {
     "type": "git",
@@ -27,19 +27,13 @@
   },
   "homepage": "https://github.com/arwidt/fluxtools#readme",
   "devDependencies": {
-    "@babel/core": "^7.1.5",
-    "babelify": "^10.0.0",
-    "cpx": "^1.5.0",
-    "gulp": "^3.9.1",
-    "gulp-uglify": "^3.0.1",
+    "browserify": "^16.2.3",
     "mocha": "^5.2.0",
-    "should": "^13.2.3",
-    "vinyl-source-stream": "^2.0.0",
-    "browserify": "^16.2.3"
+    "should": "^13.2.3"
   },
   "dependencies": {
-    "lodash": "^4.17.11",
     "deep-object-diff": "^1.1.0",
+    "lodash": "^4.17.11",
     "pubsub-js": "^1.7.0"
   }
 }
