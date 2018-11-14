@@ -4,7 +4,7 @@
   "description": "Tools to help you create a simple flux pattern",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w ./index.spec.js",
+    "test": "./node_modules/.bin/mocha -w --compilers js:@babel/register ./**/*.spec.js",
     "example": "static ."
   },
   "repository": {
@@ -27,7 +27,13 @@
   },
   "homepage": "https://github.com/arwidt/fluxtools#readme",
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/register": "^7.0.0",
     "browserify": "^16.2.3",
+    "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "should": "^13.2.3"
   },

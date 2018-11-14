@@ -1,6 +1,8 @@
 "use strict";
 
-var tr = require('./index.js');
+import FluxTools from './index.js';
+import { getAllPathsOfObject, defineStore, deepObjectDiff, wantedDiffKeys, cloneObject, PubSub } from './index.js';
+
 var should = require('should');
 
 describe('FluxTools.js', function() {
@@ -9,6 +11,21 @@ describe('FluxTools.js', function() {
         it('should run a trivial test', function() {
             should(true).equal(true);
         });
+    });
+
+    describe('FluxTools global', function() {
+
+        it('should have all the functions', function() {
+
+            FluxTools.should.have.ownProperty('getAllPathsOfObject');
+            FluxTools.should.have.ownProperty('defineStore');
+            FluxTools.should.have.ownProperty('deepObjectDiff');
+            FluxTools.should.have.ownProperty('wantedDiffKeys');
+            FluxTools.should.have.ownProperty('cloneObject');
+            FluxTools.should.have.ownProperty('PubSub');
+
+        });
+
     });
 
     describe('getAllPathsOfObject', function() {
@@ -26,7 +43,8 @@ describe('FluxTools.js', function() {
         };
 
         it('should return keys obj a object', function() {
-            const paths = tr.getAllPathsOfObject(objbase);
+
+            const paths = getAllPathsOfObject(objbase);
             paths.should.containEql('a');
             paths.should.containEql('b.c');
             paths.should.containEql('b.d');
@@ -50,7 +68,7 @@ describe('FluxTools.js', function() {
         };
 
         it('should be possible to add to or define store structure', function() {
-            let newstore = tr.defineStore(store, {d: "d"});
+            let newstore = defineStore(store, {d: "d"});
 
             newstore.d.should.equal("d");
             newstore.a.should.equal("a");
@@ -80,7 +98,7 @@ describe('FluxTools.js', function() {
         }
 
         it('should handle a single shallow diff', function() {
-            const diff = tr.deepObjectDiff(objbase, test1);
+            const diff = deepObjectDiff(objbase, test1);
             diff.length.should.equal(1);
             diff[0].should.equal('a');
         });
@@ -93,7 +111,7 @@ describe('FluxTools.js', function() {
         }
 
         it('should handle multiple shallow diffs', function() {
-            const diff = tr.deepObjectDiff(objbase, test2);
+            const diff = deepObjectDiff(objbase, test2);
             diff.length.should.equal(1);
             diff[0].should.equal('a');
         });
@@ -110,7 +128,7 @@ describe('FluxTools.js', function() {
         }
 
         it('should handle a deep diff', function() {
-            const diff = tr.deepObjectDiff(objbase, test3);
+            const diff = deepObjectDiff(objbase, test3);
             diff.should.containEql('b.e.f');
             diff.should.containEql('b.d');
         });
@@ -130,7 +148,7 @@ describe('FluxTools.js', function() {
         };
 
         it('should handle all sorts of different update diffs', function() {
-            const diff = tr.deepObjectDiff(objbase, test4);
+            const diff = deepObjectDiff(objbase, test4);
             diff.should.containEql('a');
             diff.should.containEql('b');
             diff.should.containEql('b.d');
@@ -146,9 +164,9 @@ describe('FluxTools.js', function() {
         it('should guard from unwanted diffs', function() {
             const diff = ['a', 'b.d.e', 'f.g'];
 
-            tr.wantedDiffKeys(diff, ['a']).should.equal(false);
-            tr.wantedDiffKeys(diff, ['a', 'f.g', 'a.b.c.d']).should.equal(false);
-            tr.wantedDiffKeys(diff, ['b.d']).should.equal(true);
+            wantedDiffKeys(diff, ['a']).should.equal(false);
+            wantedDiffKeys(diff, ['a', 'f.g', 'a.b.c.d']).should.equal(false);
+            wantedDiffKeys(diff, ['b.d']).should.equal(true);
         });
 
     });
@@ -168,7 +186,7 @@ describe('FluxTools.js', function() {
         };
 
         it('should clone a deep but simple object', function() {
-            const clone = tr.cloneObject(test1);
+            const clone = cloneObject(test1);
 
             clone.should.not.equal(test1);
             clone.a.should.equal("AAAAA");
@@ -195,7 +213,7 @@ describe('FluxTools.js', function() {
         }
 
         it('should clone a deep and complex object without failing', function() {
-            const clone = tr.cloneObject(test2);
+            const clone = cloneObject(test2);
 
             clone.b.d().should.not.equal(test2.b);
             clone.b.d().should.equal(clone.b);
@@ -208,23 +226,19 @@ describe('FluxTools.js', function() {
 
     describe('pubsub', function() {
 
-        it('should have a internal pubsub', function() {
-            tr.should.have.ownProperty('pubsub');
-        });
-
         before(function() {
-            tr.pubsub.clearAllSubscriptions();
+            PubSub.clearAllSubscriptions();
         });
 
         it('should have a publish and subscribe functions', function() {
-            tr.pubsub.should.have.ownProperty('subscribe');
-            tr.pubsub.should.have.ownProperty('publish');
+            PubSub.should.have.ownProperty('subscribe');
+            PubSub.should.have.ownProperty('publish');
 
-            tr.pubsub.subscribe("TEST", function(action, payload) {
+            PubSub.subscribe("TEST", function(action, payload) {
                 action.should.equal('TEST');
                 payload.payload.should.equal("this");
             });
-            tr.pubsub.publish("TEST", {payload: "this"});
+            PubSub.publish("TEST", {payload: "this"});
         });
 
     });
