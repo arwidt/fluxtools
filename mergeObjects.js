@@ -11,7 +11,7 @@ const mergeObjects = function(obj1, obj2) {
         try {
         // Property in destination object set; update its value.
         if (obj2[p].constructor === Object) {
-            obj1[p] = mergeRecursive(obj1[p], obj2[p]);
+            obj1[p] = mergeObjects(obj1[p], obj2[p]);
         } else {
             obj1[p] = obj2[p];
         }

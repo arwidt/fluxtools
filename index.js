@@ -5,6 +5,7 @@ import getAllPathsOfObject from './getAllPathsOfObject.js';
 import defineStore from './defineStore.js';
 import wantedDiffKeys from './wantedDiffKeys.js';
 import deepObjectDiff from './deepObjectDiff.js';
+import mergeObjects from './mergeObjects.js';
 
 /**
 * @function FluxTools
@@ -17,8 +18,9 @@ const FluxTools = {
   wantedDiffKeys,
   cloneObject,
   deepObjectDiff,
+  mergeObjects,
   PubSub
 };
 
 export default FluxTools;
-export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, PubSub };
+export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, mergeObjects, PubSub };

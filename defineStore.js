@@ -1,4 +1,4 @@
-import mergeObject from './.internals/mergeObjects.js';
+import mergeObjects from './mergeObjects.js';
 
 /**
  * Will merge the store with a object
@@ -7,7 +7,7 @@ import mergeObject from './.internals/mergeObjects.js';
  * @param {Object} obj 
  */
 const defineStore = function(store, obj) {
-    return mergeObject(store, obj);
+    return mergeObjects(store, obj);
 };
 
 export default defineStore;
