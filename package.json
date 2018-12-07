@@ -1,6 +1,6 @@
 {
   "name": "@arwidt/fluxtools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tools to help you create a simple flux pattern",
   "main": "index.js",
   "scripts": {
