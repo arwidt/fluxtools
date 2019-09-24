@@ -4,8 +4,8 @@
   "description": "Tools to help you create a simple flux pattern",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -w --compilers js:@babel/register ./**/*.spec.js",
-    "example": "static ."
+    "test": "./node_modules/.bin/mocha --compilers js:@babel/register ./**/*.spec.js",
+    "watch": "./node_modules/.bin/mocha -w --compilers js:@babel/register ./**/*.spec.js"
   },
   "repository": {
     "type": "git",

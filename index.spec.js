@@ -155,6 +155,8 @@ describe('FluxTools.js', function() {
             diff.should.containEql('b.e');
             diff.should.containEql('b.e.f');
             diff.should.containEql('b.g');
+
+            diff.should.containEql('b.e.newthing');
         });
         
     });
