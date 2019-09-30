@@ -1,5 +1,4 @@
 
-import PubSub from 'pubsub-js';
 import cloneObject from './cloneObject.js';
 import getAllPathsOfObject from './getAllPathsOfObject.js';
 import defineStore from './defineStore.js';
@@ -18,9 +17,8 @@ const FluxTools = {
   wantedDiffKeys,
   cloneObject,
   deepObjectDiff,
-  mergeObjects,
-  PubSub
+  mergeObjects
 };
 
 export default FluxTools;
-export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, mergeObjects, PubSub };
+export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, mergeObjects };

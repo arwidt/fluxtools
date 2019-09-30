@@ -22,7 +22,7 @@ describe('FluxTools.js', function() {
             FluxTools.should.have.ownProperty('deepObjectDiff');
             FluxTools.should.have.ownProperty('wantedDiffKeys');
             FluxTools.should.have.ownProperty('cloneObject');
-            FluxTools.should.have.ownProperty('PubSub');
+            // FluxTools.should.have.ownProperty('PubSub');
 
         });
 
@@ -155,7 +155,6 @@ describe('FluxTools.js', function() {
             diff.should.containEql('b.e');
             diff.should.containEql('b.e.f');
             diff.should.containEql('b.g');
-
             diff.should.containEql('b.e.newthing');
         });
         
@@ -226,23 +225,23 @@ describe('FluxTools.js', function() {
     });
 
 
-    describe('pubsub', function() {
+    // describe('pubsub', function() {
 
-        before(function() {
-            PubSub.clearAllSubscriptions();
-        });
+    //     before(function() {
+    //         PubSub.clearAllSubscriptions();
+    //     });
 
-        it('should have a publish and subscribe functions', function() {
-            PubSub.should.have.ownProperty('subscribe');
-            PubSub.should.have.ownProperty('publish');
+    //     it('should have a publish and subscribe functions', function() {
+    //         PubSub.should.have.ownProperty('subscribe');
+    //         PubSub.should.have.ownProperty('publish');
 
-            PubSub.subscribe("TEST", function(action, payload) {
-                action.should.equal('TEST');
-                payload.payload.should.equal("this");
-            });
-            PubSub.publish("TEST", {payload: "this"});
-        });
+    //         PubSub.subscribe("TEST", function(action, payload) {
+    //             action.should.equal('TEST');
+    //             payload.payload.should.equal("this");
+    //         });
+    //         PubSub.publish("TEST", {payload: "this"});
+    //     });
 
-    });
+    // });
 
 });
