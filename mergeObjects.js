@@ -23,4 +23,4 @@ const mergeObjects = function(obj1, obj2) {
     return obj1;
 }
 
-export default mergeObjects;
+module.exports = mergeObjects;

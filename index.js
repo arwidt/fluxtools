@@ -1,10 +1,10 @@
 
-import cloneObject from './cloneObject.js';
-import getAllPathsOfObject from './getAllPathsOfObject.js';
-import defineStore from './defineStore.js';
-import wantedDiffKeys from './wantedDiffKeys.js';
-import deepObjectDiff from './deepObjectDiff.js';
-import mergeObjects from './mergeObjects.js';
+const cloneObject = require('./cloneObject.js');
+const getAllPathsOfObject = require('./getAllPathsOfObject.js');
+const defineStore = require('./defineStore.js');
+const wantedDiffKeys = require('./wantedDiffKeys.js');
+const deepObjectDiff = require('./deepObjectDiff.js');
+const mergeObjects = require('./mergeObjects.js');
 
 /**
 * @function FluxTools
@@ -20,5 +20,5 @@ const FluxTools = {
   mergeObjects
 };
 
-export default FluxTools;
+module.exports = FluxTools;
 export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, mergeObjects };

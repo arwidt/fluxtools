@@ -1,4 +1,4 @@
-import mergeObjects from './mergeObjects.js';
+const mergeObjects = require('./mergeObjects.js');
 
 /**
  * Will merge the store with a object
@@ -10,4 +10,4 @@ const defineStore = function(store, obj) {
     return mergeObjects(store, obj);
 };
 
-export default defineStore;
+module.exports = defineStore;

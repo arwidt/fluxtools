@@ -13,4 +13,4 @@ const wantedDiffKeys = function(diff, paths) {
     return true;
 }
 
-export default wantedDiffKeys;
+module.exports = wantedDiffKeys;

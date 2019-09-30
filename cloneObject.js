@@ -30,4 +30,4 @@ const cloneObject = function(obj) {
     return ret;
 }
 
-export default cloneObject;
+module.exports = cloneObject;

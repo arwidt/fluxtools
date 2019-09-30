@@ -1,9 +1,8 @@
-import isArray from 'lodash/isArray';
-import flatMap from 'lodash/flatMap';
-import isPlainObject from 'lodash/isPlainObject';
-import keys from 'lodash/keys';
-import concat from 'lodash/concat';
-import map from 'lodash/map';
+const flatMap = require('lodash.flatmap');
+const isPlainObject = require('lodash.isplainobject');
+const keys = require('lodash.keys');
+const concat = require('lodash.concat');
+const map = require('lodash.map');
 
 /**
  * 
@@ -14,7 +13,7 @@ import map from 'lodash/map';
 const getAllPathsOfObject = function(obj) {
     function paths(obj, parentKey) {
         var result;
-        if (isArray(obj)) {
+        if (Array.isArray(obj)) {
             var idx = 0;
             result = flatMap(obj, function (obj) {
                 return paths(obj, (parentKey || '') + '[' + idx++ + ']');
@@ -36,4 +35,4 @@ const getAllPathsOfObject = function(obj) {
     return paths(obj);
 }
 
-export default getAllPathsOfObject;
+module.exports = getAllPathsOfObject;

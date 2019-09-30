@@ -1,5 +1,5 @@
-import { updatedDiff } from 'deep-object-diff';
-import getAllPathsOfObject from './getAllPathsOfObject.js';
+const updatedDiff = require('deep-object-diff').updatedDiff;
+const getAllPathsOfObject = require('./getAllPathsOfObject.js');
 
 /**
  * 
@@ -10,4 +10,4 @@ const deepObjectDiff = function(obj1, obj2) {
     return getAllPathsOfObject(updatedDiff(obj1, obj2));
 };
 
-export default deepObjectDiff;
+module.exports = deepObjectDiff;
