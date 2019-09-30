@@ -21,4 +21,4 @@ const FluxTools = {
 };
 
 module.exports = FluxTools;
-export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, mergeObjects };
+// export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, mergeObjects };
