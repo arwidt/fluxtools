@@ -31,7 +31,6 @@ const getAllPathsOfObject = function(obj) {
         }
         return concat(result, parentKey || []);
     }
-    
     return paths(obj);
 }
 

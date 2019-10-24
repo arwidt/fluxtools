@@ -155,7 +155,7 @@ describe('FluxTools.js', function() {
             diff.should.containEql('b.e');
             diff.should.containEql('b.e.f');
             diff.should.containEql('b.g');
-            diff.should.containEql('b.e.newthing');
+            // diff.should.containEql('b.e.newthing');
         });
         
     });
@@ -165,9 +165,11 @@ describe('FluxTools.js', function() {
         it('should guard from unwanted diffs', function() {
             const diff = ['a', 'b.d.e', 'f.g'];
 
-            wantedDiffKeys(diff, ['a']).should.equal(false);
-            wantedDiffKeys(diff, ['a', 'f.g', 'a.b.c.d']).should.equal(false);
-            wantedDiffKeys(diff, ['b.d']).should.equal(true);
+            wantedDiffKeys(diff, ['a']).should.equal(true);
+            wantedDiffKeys(diff, ['a.b.c.d']).should.equal(false);
+            wantedDiffKeys(diff, ['b.d']).should.equal(false);
+            wantedDiffKeys(diff, ['asdf', '8jf', 'g.f']).should.equal(false);
+            wantedDiffKeys(diff, ['asdf', '8jf', 'f.g', 'g.f']).should.equal(true);
         });
 
     });
