@@ -12,12 +12,12 @@ const mergeObjects = require('./mergeObjects.js');
 * @return {type} {description}
 */
 const FluxTools = {
-  getAllPathsOfObject,
-  defineStore,
-  wantedDiffKeys,
-  cloneObject,
-  deepObjectDiff,
-  mergeObjects
+  'getAllPathsOfObject': getAllPathsOfObject,
+  'defineStore': defineStore,
+  'wantedDiffKeys': wantedDiffKeys,
+  'cloneObject': cloneObject,
+  'deepObjectDiff': deepObjectDiff,
+  'mergeObjects': mergeObjects
 };
 
 module.exports = FluxTools;
