@@ -5,6 +5,7 @@ const defineStore = require('./defineStore.js');
 const wantedDiffKeys = require('./wantedDiffKeys.js');
 const deepObjectDiff = require('./deepObjectDiff.js');
 const mergeObjects = require('./mergeObjects.js');
+const shallowObjectDiff = require('./shallowObjectDiff.js');
 
 /**
 * @function FluxTools
@@ -17,8 +18,8 @@ const FluxTools = {
   'wantedDiffKeys': wantedDiffKeys,
   'cloneObject': cloneObject,
   'deepObjectDiff': deepObjectDiff,
-  'mergeObjects': mergeObjects
+  'mergeObjects': mergeObjects,
+  'shallowObjectDiff': shallowObjectDiff
 };
 
 module.exports = FluxTools;
-// export { getAllPathsOfObject, defineStore, wantedDiffKeys, cloneObject, deepObjectDiff, mergeObjects };

@@ -1,7 +1,15 @@
 "use strict";
 
 import FluxTools from './index.js';
-import { getAllPathsOfObject, defineStore, deepObjectDiff, wantedDiffKeys, cloneObject, PubSub } from './index.js';
+import {
+  getAllPathsOfObject,
+  defineStore,
+  deepObjectDiff,
+  wantedDiffKeys,
+  cloneObject,
+  shallowObjectDiff
+} from './index.js';
+
 
 var should = require('should');
 
@@ -22,7 +30,6 @@ describe('FluxTools.js', function() {
             FluxTools.should.have.ownProperty('deepObjectDiff');
             FluxTools.should.have.ownProperty('wantedDiffKeys');
             FluxTools.should.have.ownProperty('cloneObject');
-            // FluxTools.should.have.ownProperty('PubSub');
 
         });
 
@@ -112,8 +119,9 @@ describe('FluxTools.js', function() {
 
         it('should handle multiple shallow diffs', function() {
             const diff = deepObjectDiff(objbase, test2);
-            diff.length.should.equal(1);
-            diff[0].should.equal('a');
+            diff.length.should.equal(2);
+            diff.should.containEql('a');
+            diff.should.containEql('g');
         });
 
         // -------------------------------
@@ -155,9 +163,53 @@ describe('FluxTools.js', function() {
             diff.should.containEql('b.e');
             diff.should.containEql('b.e.f');
             diff.should.containEql('b.g');
-            // diff.should.containEql('b.e.newthing');
+            diff.should.containEql('b.e.newthing');
         });
         
+    });
+
+    describe('shallowObjectDiff', function() {
+
+        const objbase = {
+            a: "a",
+            b: {
+                c: 123,
+                d: "d",
+                e: {
+                    f: "äf"
+                },
+                g: [1, 2, 3, 4]
+            },
+            c: [1,2,3]
+        };
+
+        const test = {
+            a: "AAAAA",
+            b: {
+                d: "DDDDD",
+                e: {
+                    newthing: "NEWTHING",
+                    f: "FFFFF"
+                },
+                g: [1, 5, 3, 4]
+            },
+            c: [1,99, 3],
+            d: ['asdf']
+        };
+
+        it('should only show level 0 diff when state is updated', function() {
+            const diff = shallowObjectDiff(objbase, test);
+
+            diff.should.not.containEql('b.d');
+            diff.should.not.containEql('b.c');
+            diff.should.not.containEql('b.e.newthing');
+            diff.should.containEql('a');
+            diff.should.containEql('b');
+            diff.should.containEql('c');
+            diff.should.containEql('d');
+            diff.length.should.equal(4);
+        });
+
     });
 
     describe('wantedDiffKeys', function() {
