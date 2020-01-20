@@ -150,7 +150,9 @@ describe('FluxTools.js', function() {
                     newthing: "NEWTHING",
                     f: "FFFFF"
                 },
-                g: [1, 5, 3, 4]
+                g: {
+                    thi: 's is something else'
+                }
             },
             
         };
@@ -163,6 +165,7 @@ describe('FluxTools.js', function() {
             diff.should.containEql('b.e');
             diff.should.containEql('b.e.f');
             diff.should.containEql('b.g');
+            diff.should.containEql('b.g.thi');
             diff.should.containEql('b.e.newthing');
         });
         
