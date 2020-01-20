@@ -1,9 +1,16 @@
 /**
- * Will clone a object really fast.
+ * @function cloneObject
+ * 
+ * @description Will clone a object really fast.
  * From jsperf, took the fastest function for deep cloning
  * https://jsperf.com/deep-cloning-of-objects/45
+ * Please note that its not possible to clone object thats to 
+ * advanced, so keep the data to base literals like string or number.
+ * Dont go saving react component or something like that.
  * 
- * @param {Object} obj 
+ * @param  {Object} obj Clones a object
+ * 
+ * @return {Object}     The new cloned object
  */
 const cloneObject = function(obj) {
     var i, len, ret;

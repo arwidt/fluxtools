@@ -1,10 +1,14 @@
 const mergeObjects = require('./mergeObjects.js');
 
 /**
- * Will merge the store with a object
+ * @function defineStore
  * 
- * @param {Object} store 
- * @param {Object} obj 
+ * @description This function is used to merge or add new properties to the State object. It is a simple merge object function.
+ * 
+ * @param  {type} store The Store object
+ * @param  {type} obj   The object containing the new data
+ * 
+ * @return {type}       A copy of the current State object
  */
 const defineStore = function(store, obj) {
     return mergeObjects(store, obj);

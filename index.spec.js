@@ -278,24 +278,4 @@ describe('FluxTools.js', function() {
 
     });
 
-
-    // describe('pubsub', function() {
-
-    //     before(function() {
-    //         PubSub.clearAllSubscriptions();
-    //     });
-
-    //     it('should have a publish and subscribe functions', function() {
-    //         PubSub.should.have.ownProperty('subscribe');
-    //         PubSub.should.have.ownProperty('publish');
-
-    //         PubSub.subscribe("TEST", function(action, payload) {
-    //             action.should.equal('TEST');
-    //             payload.payload.should.equal("this");
-    //         });
-    //         PubSub.publish("TEST", {payload: "this"});
-    //     });
-
-    // });
-
 });
