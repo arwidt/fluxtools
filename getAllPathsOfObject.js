@@ -5,10 +5,14 @@ const concat = require('lodash.concat');
 const map = require('lodash.map');
 
 /**
+ * @function getAllPathsOfObject
  * 
- * Gets all paths of values in a object
+ * @description This function si used in the deepObjectDiff to get all path from the diff.
+ * The paths are used as keys of interest for each subscriber of the Store.
  * 
- * @param {Object} obj 
+ * @param  {Object} obj A object, mostly the State object if use in the Flux pattern.
+ * 
+ * @return {Array}      A list of path in the object that has changed.
  */
 const getAllPathsOfObject = function(obj) {
     function paths(obj, parentKey) {

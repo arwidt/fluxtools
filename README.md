@@ -5,9 +5,9 @@ For them MVC did not scale well, flux should solve that.
 
 Please read more on [https://facebook.github.io/flux/]()
 
-If you have a big project and you need well documented structure and way of working then you really should look at [React](https://reactjs.org/) and [Redux](https://redux.js.org/) instead of this.
+If you feel comfortable with you implementation of the pattern there is no reason why it couldnt work on a big scale. I have personally used these tools to implement a flux pattern on bigger projects, but... if you have a big project and you need well documented structure and way of working then you really should look at [React](https://reactjs.org/) and [Redux](https://redux.js.org/) instead of this.
 
-This repo is good if you have a small application and need some structure to take away many of the buggs and spagetti code. There tools are here to help you implementing a simple flux pattern.
+These tools shine best if you have a small application and need some structure to take away many of the buggs and spagetti code. There tools are here to help you implementing a simple flux pattern that is great for SPA with allot of gui.
 
 ## Example
 
@@ -48,7 +48,34 @@ deepObjectDiff(a, b)
 
 result ----------
 
-['abc', 'foo.bar']
+['test', 'abc', 'foo.bar']
+
+```
+
+### shallowObjectDiff
+Will compare two objects and return the keys that differ, will only give the keys on first level of the object.
+
+```
+let a = {
+	abc: "ABC",
+	foo: {
+		bar: 123
+	}
+}
+
+let b = {
+	test: "TEST",
+	abc: "CBA",
+	foo: {
+		bar: "foobar"
+	}
+}
+
+shallowObjectDiff(a, b)
+
+result ----------
+
+['test', 'abc', 'foo']
 
 ```
 
