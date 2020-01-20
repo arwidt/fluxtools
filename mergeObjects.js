@@ -1,10 +1,12 @@
 /**
- * Will deep merge a object with another.
+ * @function mergeObjects
  * 
- * Taken from https://jsperf.com/deep-merge2/8
+ * @description Will merge those objects, copied from https://jsperf.com/deep-merge2/8
  * 
- * @param {Object} obj1 
- * @param {Object} obj2 
+ * @param  {Object} obj1    Base object
+ * @param  {Object} obj2    The object that contains the changes
+ * 
+ * @return {Object}         New merged object 
  */
 const mergeObjects = function(obj1, obj2) {
     for (var p in obj2) { // jshint ignore:line
