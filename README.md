@@ -1,4 +1,4 @@
-#FLUXTOOLS
+# FLUXTOOLS
 
 Flux is a design pattern facebook created to tackle problems they had with a standarad MCV structure.
 For them MVC did not scale well, flux should solve that.
